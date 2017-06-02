@@ -58,6 +58,9 @@ border: none;
        </item>
        <item>
         <widget class="QToolButton" name="timer_tab_btn">
+         <property name="toolTip">
+          <string>Timer</string>
+         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -84,6 +87,9 @@ border: none;
        </item>
        <item>
         <widget class="QToolButton" name="notes_tab_btn">
+         <property name="toolTip">
+          <string>Notes/Ideas</string>
+         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -855,6 +861,7 @@ border: none;
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionAbout"/>
     <addaction name="actionExit"/>
    </widget>
    <addaction name="menuFile"/>
@@ -863,6 +870,11 @@ border: none;
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
    </property>
   </action>
  </widget>

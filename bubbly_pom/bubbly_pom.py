@@ -10,6 +10,7 @@ from bubbly_pom import resources
 from bubbly_pom.user_data import UserData
 from bubbly_pom.timer import Timer
 from bubbly_pom.note_manager import NoteManager
+from bubbly_pom.wizard_ui import AboutWizard
 
 
 class BubblyPom(QMainWindow, Ui_MainWindow):
@@ -22,6 +23,7 @@ class BubblyPom(QMainWindow, Ui_MainWindow):
         self.init_tray_icon()
         self.init_timer()
         self.init_note()
+        self.about_wiz = AboutWizard()
         self.init_connection()
         self.clear_progress()
 
@@ -77,9 +79,11 @@ class BubblyPom(QMainWindow, Ui_MainWindow):
         self.stop_timer_action = QAction("Stop timer", self)
         self.next_timer_action = QAction("Next timer", self)
 
-        self.note_action = QAction("New note/idea", self)
+        self.new_note_action = QAction("New note/idea", self)
 
         self.restore_action = QAction("Show Main Window", self)
+
+        self.about_action = QAction("About ;)", self)
         self.quit_action = QAction("Quit", self)
 
         tray_icon_menu = QMenu(self)
@@ -88,17 +92,18 @@ class BubblyPom(QMainWindow, Ui_MainWindow):
         tray_icon_menu.addAction(self.stop_timer_action)
         tray_icon_menu.addAction(self.next_timer_action)
         tray_icon_menu.addSeparator()
-        tray_icon_menu.addAction(self.note_action)
+        tray_icon_menu.addAction(self.new_note_action)
         tray_icon_menu.addSeparator()
         tray_icon_menu.addAction(self.restore_action)
         tray_icon_menu.addSeparator()
+        tray_icon_menu.addAction(self.about_action)
         tray_icon_menu.addAction(self.quit_action)
 
         self.tray_icon = QSystemTrayIcon(QIcon(':/lollipop_ico'), self)
         self.tray_icon.setContextMenu(tray_icon_menu)
         self.tray_icon.show()
 
-        self.tray_icon.activated.connect(self.show)
+
 
     def init_timer(self):
         self.timer = Timer(
@@ -132,6 +137,7 @@ class BubblyPom(QMainWindow, Ui_MainWindow):
         self.soundcloud_tab_btn.clicked.connect(self.change_tab)
 
         self.restore_action.triggered.connect(self.show)
+        self.tray_icon.activated.connect(self.show)
         self.quit_action.triggered.connect(self.quit)
         self.actionExit.triggered.connect(self.quit)
 
@@ -156,13 +162,16 @@ class BubblyPom(QMainWindow, Ui_MainWindow):
         self.timer.notify_progress.connect(self.update_progress)
 
         self.add_note_btn.clicked.connect(self.note_manager.show_new)
-
+        self.new_note_action.triggered.connect(self.note_manager.show_new)
         self.note_manager.new_note_added.connect(self.add_new_note)
         self.note_manager.refresh_table.connect(self.reconstruct_notes_table)
 
         self.notes_table.cellDoubleClicked.connect(self.show_note)
         self.notes_table.itemSelectionChanged.connect(self.enable_delete_btn)
         self.delete_note_btn.clicked.connect(self.delete_note)
+
+        self.about_action.triggered.connect(self.about_wiz.show)
+        self.actionAbout.triggered.connect(self.about_wiz.show)
 
     @pyqtSlot()
     def enable_delete_btn(self):

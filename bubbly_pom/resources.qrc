@@ -7,5 +7,6 @@
         <file alias="note_ico">resources/note.png</file>
         <file alias="lollipop_ico">resources/lollipop.png</file>
         <file alias="splash">resources/splash.png</file>
+        <file alias="simon_cat">resources/simon_cat.png</file>
     </qresource>
 </RCC>

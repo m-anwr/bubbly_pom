@@ -393,6 +393,9 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
         self.actionExit = QtWidgets.QAction(MainWindow)
         self.actionExit.setObjectName("actionExit")
+        self.actionAbout = QtWidgets.QAction(MainWindow)
+        self.actionAbout.setObjectName("actionAbout")
+        self.menuFile.addAction(self.actionAbout)
         self.menuFile.addAction(self.actionExit)
         self.menubar.addAction(self.menuFile.menuAction())
 
@@ -407,7 +410,9 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "BubblyPom"))
+        self.timer_tab_btn.setToolTip(_translate("MainWindow", "Timer"))
         self.timer_tab_btn.setText(_translate("MainWindow", "..."))
+        self.notes_tab_btn.setToolTip(_translate("MainWindow", "Notes/Ideas"))
         self.notes_tab_btn.setText(_translate("MainWindow", "..."))
         self.pinterest_tab_btn.setText(_translate("MainWindow", "..."))
         self.soundcloud_tab_btn.setText(_translate("MainWindow", "..."))
@@ -441,4 +446,5 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.soundcloud_tab), _translate("MainWindow", "Soundcloud Settings"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.actionExit.setText(_translate("MainWindow", "Exit"))
+        self.actionAbout.setText(_translate("MainWindow", "About"))
 
