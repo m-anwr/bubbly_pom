@@ -1,0 +1,11 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/">
+        <file alias="timer_ico">resources/timer.png</file>
+        <file alias="pinterest_ico">resources/pinterest.png</file>
+        <file alias="soundcloud_ico">resources/soundcloud.png</file>
+        <file alias="note_ico">resources/note.png</file>
+        <file alias="lollipop_ico">resources/lollipop.png</file>
+        <file alias="splash">resources/splash.png</file>
+    </qresource>
+</RCC>
