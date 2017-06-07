@@ -9,7 +9,7 @@ class TimerType(Enum):
 
 
 class Timer(QObject):
-    notify = pyqtSignal(str, str)
+    notify = pyqtSignal(str, int)
     notify_progress = pyqtSignal(int, int, int)
 
     def __init__(self, pom_dur, short_dur, long_dur, long_freq):
@@ -31,7 +31,7 @@ class Timer(QObject):
         self.finished_poms = 0
 
     def send_progress(self):
-        print(f"Send progress: [{self.curr_timer_type} {self.pom_dur} {self.short_dur} {self.long_dur}] {self.timer.remainingTime()}")
+        #print(f"Send progress: [{self.curr_timer_type} {self.pom_dur} {self.short_dur} {self.long_dur}] {self.timer.remainingTime()}")
         remaining_time = self.timer.remainingTime()
         mins = (remaining_time / 1000) // 60
         secs = (remaining_time / 1000) % 60
@@ -41,13 +41,13 @@ class Timer(QObject):
     def start(self):
         if self.curr_timer_type == TimerType.Pom:
             self.timer.start(self.pom_dur * 60 * 1000)
-            self.notify.emit("Pomodoro", f"Duration: {self.pom_dur} min")
+            self.notify.emit("Pomodoro", self.pom_dur )
         elif self.curr_timer_type == TimerType.ShortBrk:
             self.timer.start(self.short_dur * 60 * 1000)
-            self.notify.emit("Short Break", f"Duration: {self.short_dur} min")
+            self.notify.emit("Short Break", self.short_dur)
         elif self.curr_timer_type == TimerType.LongBrk:
             self.timer.start(self.long_dur * 60 * 1000)
-            self.notify.emit("Long Break", f"Duration: {self.long_dur} min")
+            self.notify.emit("Long Break", self.long_dur)
 
         self.notification_timer.start(1000)
 

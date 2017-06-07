@@ -219,12 +219,17 @@ class BubblyPom(QMainWindow, Ui_MainWindow):
     @pyqtSlot(int, int, int)
     def update_progress(self, mins, secs, progress):
         self.curr_timer_progress.setValue(progress)
-        self.current_timer_action.setText(f"Remaining: {mins}:{secs}")
+        self.current_timer_action.setText(
+            "Remaining: {}:{}".format(mins, secs)
+        )
 
-    @pyqtSlot(str, str)
+    @pyqtSlot(str, int)
     def show_notification(self, timer_type, timer_dur):
-        self.tray_icon.showMessage(f'BubblyPom: {timer_type}', timer_dur,
-                                   QSystemTrayIcon.Information, 3000)
+        self.tray_icon.showMessage(
+            "BubblyPom: {}".format(timer_type),
+            "Duration: {} min".format(timer_dur),
+            QSystemTrayIcon.Information, 5000
+        )
 
     @pyqtSlot()
     def change_tab(self):
